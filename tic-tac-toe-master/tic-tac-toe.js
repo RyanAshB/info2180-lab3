@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (gameBoard[index] == "") {
                 const numberOfMoves = gameBoard.filter(symbol => symbol !== "").length;
 
-                // Determine the current player (X or O) based on the number of moves
+                // Determine which letter to place
                 let currentPlayer;
-                if (numberOfMoves % 2 === 0) {
-                  currentPlayer = 'X'; // Even number of moves, so it's player X's turn
+                if (numberOfMoves % 2 == 0) {
+                  currentPlayer = 'X';
                 } else {
-                  currentPlayer = 'O'; // Odd number of moves, so it's player O's turn
+                  currentPlayer = 'O';
                 }
 
                 // Update the game to display an X or an O in the appropriate square when clicked
@@ -69,5 +69,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
     }
+
+    //Starts new game
+    const newGame = document.querySelector('.btn')
+    newGame.addEventListener('click', () => {
+        for (let x = 0; x < gameBoard.length; x++) {
+            gameBoard[x] = "";
+        }
+
+        // Clear squares
+        gridSquares.forEach(square => {
+            square.textContent = "";
+            square.classList.remove('X', 'O');
+        });
+    
+        // Reset Messages
+        const statusElement = document.getElementById('status');
+        statusElement.textContent = 'Move your mouse over a square and click to play an X or an O.';
+        statusElement.classList.remove('you-won');
+    })
 
 });
