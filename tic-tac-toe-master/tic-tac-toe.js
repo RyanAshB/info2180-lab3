@@ -25,6 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 gameBoard[index] = currentPlayer;
                 square.classList.add(currentPlayer);
                 square.textContent = currentPlayer;
+
+                // Check for winner after each move
+                const winner = checkIfWin(gameBoard);
+
+                // Displays Win Message
+                const statusElement = document.getElementById('status');
+                if (winner) {
+                    statusElement.textContent = `Congratulations! ${winner} is the Winner!`;
+                    statusElement.classList.add('you-won');
+                }
             }
         })
 
@@ -38,5 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
           });
     })
 
+
+    function checkIfWin(isWin) {
+    // Define the winning combinations
+        const winGroups = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6]             // Diagonals
+        ];
+
+        // Checks for a winning combination
+        for (let i = 0; i < winGroups.length; i++) {
+            const a = winGroups[i][0];
+            const b = winGroups[i][1];
+            const c = winGroups[i][2];
+
+            if (isWin[a] == isWin[b] && isWin[b] == isWin[c]) {
+                return isWin[a]; 
+            }
+        }
+
+    }
 
 });
