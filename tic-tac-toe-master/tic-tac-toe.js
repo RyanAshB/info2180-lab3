@@ -21,12 +21,21 @@ document.addEventListener('DOMContentLoaded', function() {
                   currentPlayer = 'O'; // Odd number of moves, so it's player O's turn
                 }
 
-                // Update the game state and display the X or O in the square
+                // Update the game to display an X or an O in the appropriate square when clicked
                 gameBoard[index] = currentPlayer;
                 square.classList.add(currentPlayer);
                 square.textContent = currentPlayer;
             }
         })
+
+        // Changes the colour of a square when the mouse hovers over it
+        square.addEventListener('mouseover', () => {
+            square.classList.add('hover');
+          });
+
+          square.addEventListener('mouseleave', () => {
+            square.classList.remove('hover');
+          });
     })
 
 
